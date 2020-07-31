@@ -48,20 +48,20 @@ Variáveis que apresentarem problemas para serem extraídas de determinadas linh
 # Questões
 
 ##### Qual é o objetivo do comando **cache** em Spark?
-O comando cache é utilizado para guardar os RDDs/Datasets/Dataframes na memória principal (RAM). Caso a quantidade de dados exceda a capacidade da memória principal o Spark utilizará a memória secundária (SSD, HDD) para esse excedente.
+O comando cache é utilizado para guardar os RDDs/Datasets/Dataframes na memória principal (RAM). Caso a quantidade de dados ultrapasse a capacidade da memória principal, o Spark utilizará a memória secundária (SSD, HDD) para armazenar o excedente.
 
 ##### O mesmo código implementado em Spark é normalmente mais rápido que a implementação equivalente em MapReduce. Por quê?
-Jobs MapReduce tem por característica guardar os dados gerados durante a execuação do job na memória secundária, já o Spark faz proveito da memória primária, cujo acesso é mais rápido. Essa diferença faz com que os jobs escritos em Spark sejam geralmente mais rápidos do que jobs MapReduce.
+Porque, enquanto os jobs MapReduce têm por característica guardar os dados gerados durante a execução do programa na memória secundária, os jobs em Spark fazem proveito da memória RAM para guardar os dados que estão sendo utilizados. Com isso, gera-se menos acessos ao disco rígido e, consequentemente, uma potencial melhora de performance. 
 
 ##### Qual é a função do **SparkContext**?
 SparkContext, com a ajuda dos gerenciadores de recursos, conecta a aplicação Spark com o cluster e demais recursos.
 
 ##### Explique com suas palavras o que é Resilient Distributed Datasets (RDD).
-O RDD é a estrutura de dados base do Spark sobre qual todas as outras foram construídas.
+O RDD é a estrutura de dados base do Spark, sobre a qual todas as outras foram construídas. Essa estrutura é uma coleção de objetos imutável e particionada entre os workers.
 
 ##### **GroupByKey** é menos eficiente que **reduceByKey** em grandes datasets. Por quê?
-O Spark é um framework para realização de computação parelela, ou seja, distriuída em diversos nós. Cada um desses nós recebe o código a ser executado e uma parte dos dados. Quando utilizamos o comando GroupByKey forçamos a transferência de todos os dados com uma mesma chave para o nó responsável pelo seu processamento, dependendo da característica dos dados em questão podemos gerar um aumento excessivo do tráfego dos dados na rede e/ou podemos acabar sobrecarregando um desses nós. Essa sobrecarga em um dos nós faz com que todos os outros fiquem ociosos enquanto aguardam a finalização do seu processamento e pode até mesmo gerar falhas de execução.
-O reduceByKey tem uma abordagem diferente para esse problema. Cada nó agrupa os dados disponíveis para si e passa o resultado adiante, o próximo nó agrupa somente os dados que foram disponibilizados para ele e assim por diante, até que tenhamos valores únicos para cada uma das chaves.
+A utilização do GroupByKey força a transferência de todos os dados com uma mesma chave para o nó responsável pelo seu processamento, o que, dependendo da característica dos dados em questão, pode gerar um aumento excessivo do tráfego dos dados na rede e/ou sobrecarregar um desses nós. Essa sobrecarga faria com que todos os outros nós ficassem ociosos enquanto aguardam a finalização do processamento do nó sobrecarregado, podendo até mesmo gerar falhas na sua execução.
+O reduceByKey tem uma abordagem diferente para esse problema. Cada nó agrupa os dados disponíveis para si e passa o resultado adiante, de forma que próximo nó agrupa somente os dados que foram disponibilizados para ele e assim por diante, até que tenhamos valores únicos para cada uma das chaves.
 
 ##### Explique o que o código Scala abaixo faz. 
 ```
@@ -71,5 +71,5 @@ val counts = textFile.flatMap(line => line.split(" "))
     .reduceByKey(_+_)
 counts.saveAsTextFile("hdfs://...")
 ```
-Esse programa conta a quantidade de vezes que cada palavra aparece no arquivo do input e grava o resultado no HDFS. A primeira linha do código lê um arquivo armazenado no HDFS, a segunda linha separa o conteúdo do arquivo nos espaços e retorna cada um dos tokens em uma linha distinta. Em seguida criasse o par chave e valor, sendo a chave a token criado no comando anterior e o valor o inteiro um. Por último soma os valores e agrupa as chaves para então gravar um arquivo com os resultados no HDFS.
+Esse programa conta a quantidade de vezes que cada palavra aparece no arquivo do input e grava o resultado no HDFS. A primeira linha do código lê um arquivo armazenado no HDFS, a segunda linha separa o conteúdo do arquivo nos espaços e retorna cada um dos tokens em uma linha distinta. Em seguida cria-se o par chave e valor, sendo a chave o token criado no comando anterior, e o valor o inteiro um. Por último, somam-se os valores e agrupam-se as chaves para então gravar um arquivo com os resultados no HDFS.
 
