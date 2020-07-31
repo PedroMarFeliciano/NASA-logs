@@ -41,6 +41,10 @@ Após a finalizada a execução, considerando que foram selecionadas todas as m�
 
 Vale notar que o nome das pastas criadas variam de acordo com o momento no qual o job foi executado.
 
+### Valores faltantes
+
+Variáveis que apresentarem problemas para serem extraídas de determinadas linhas do arquivos de input terão o valor *missing*, com excessão da variável size (correspondente ao valor de bytes do registro) que terá 0 como valor. Esses valores foram excluídos dos cálculos.
+
 # Questões
 
 ##### Qual é o objetivo do comando **cache** em Spark?
