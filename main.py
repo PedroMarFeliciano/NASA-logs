@@ -1,4 +1,3 @@
-# spark-submit --py-files pipeline.py main.py --master local[*] --jobs hosts-unicos --input-dir /home/pedro/Desktop/Spark/SparkTest/case --output-dir /home/pedro/Desktop/Spark/SparkTest/output/
 from datetime import datetime
 import argparse
 
@@ -16,8 +15,8 @@ def get_jobs(jobs):
     if 'todos' in job_list:
         return available_jobs
     
-    # exclui jobs que nao estao na lista de jobs disponiveis
-    return [job for job in job_list]
+    # Delete jobs/words that are not in available_jobs
+    return [job for job in job_list if job in available_jobs]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

@@ -4,13 +4,26 @@ from pyspark.sql.functions import countDistinct, udf
 from pyspark.sql.types import StringType
 import pyspark.sql.functions as functions
 
-"""
-    Class that computes
-"""
 
 class Pipeline:
+    """
+    Class that creates SparkSession and calculates the following metrics:
 
+        1- Quantity of distinct hosts
+        2- Total of 404 errors
+        3- 5 URLs with most 404 errors
+        4- 404 erros per day
+        5- Total exchanged bytes
+    """
+    
     def run(self, master, app_name, log_level, input_file, output_dir, jobs):
+        """
+        This method create SparkSession and calculates the metrics that are 
+        in jobs variable.
+        Results will be shown in console, using df.show(), and also be 
+        written output-dir
+        """
+        
         conf = SparkConf().setMaster(master).setAppName(app_name)
         sc = SparkContext(conf=conf)
         spark = SparkSession(sc)
