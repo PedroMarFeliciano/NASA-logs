@@ -1,9 +1,3 @@
-**Table of Contents**
-
-[TOCM]
-
-[TOC]
-
 # Processamento dos logs da NASA
 
 ### Dados utilizados
@@ -43,6 +37,7 @@ spark-submit --py-file pipeline.py main.py --master local[*] --input-file /usr/l
 
 Após a finalizada a execução, considerando que foram selecionadas todas as métricas, a pasta output terá essa configuração:
 
+![Output directory](https://github.com/PedroMarFeliciano/NASA-logs/blob/master/images/output-dir.png)
 
 Vale notar que o nome das pastas criadas variam de acordo com o momento no qual o job foi executado.
 
