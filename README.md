@@ -3,7 +3,7 @@
 ### Dados utilizados
 Para a construção do job que analisa métricas dos logs de requisições ao servidor da NASA foram utilizados os dataset de logs gerados entre 01 de julho até 31 de agosto de 1995.
 
-Esses dados de julho estão disponíveis [aqui](ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz) e os de agosto [aqui](ftp://ita.ee.lbl.gov/traces/NASA_access_log_Aug95.gz)
+Esses dados de julho estão disponíveis [aqui](https://www.google.com/url?sa=D&q=ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz&ust=1596294960000000&usg=AOvVaw27Uuv7PdbnLRcNck5mYi-3&hl=pt-BR&source=gmail "Julho") e os de agosto [aqui](https://www.google.com/url?sa=D&q=ftp://ita.ee.lbl.gov/traces/NASA_access_log_Aug95.gz&ust=1596294960000000&usg=AOvVaw1HbAEf4sa7B8tkNtPtFAiG&hl=pt-BR&source=gmail "Agosto")
 
 ### Estrutura do código
 O job é constituído por dois arquivos, main e pipeline.  Esses arquivos cuidam da interação com o usuário e da construção do job Spark e devidos cálculos, respectivamente.
